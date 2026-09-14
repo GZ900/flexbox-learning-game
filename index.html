@@ -29,26 +29,20 @@
             <section class="game-panel">
 
                 <div class="status-bar">
-                    <span id="level-indicator">Level 1 of 6</span>
+                    <span id="level-indicator">Level 1 of 20</span>
                     <span id="attempt-counter">Attempts: 0</span>
                 </div>
 
                 <h2 id="level-title">Mission 1</h2>
 
                 <p id="instruction">
-                    Move the space crew to the center of the board.
+                    Keep the crew in a row at the top and center them horizontally.
                 </p>
 
 
                 <div class="board-wrapper">
 
-                    <div id="game-board" class="game-board">
-
-                        <div class="game-item">🚀</div>
-                        <div class="game-item">👨‍🚀</div>
-                        <div class="game-item">🛰️</div>
-
-                    </div>
+                    <div id="game-board" class="game-board"></div>
 
                 </div>
 
@@ -58,6 +52,11 @@
             <section class="controls-panel">
 
                 <h2>Flexbox Controls</h2>
+
+                <p class="controls-intro">
+                    Choose values from the menus or write the CSS properties manually.
+                </p>
+
 
                 <div class="controls">
 
@@ -112,7 +111,30 @@
                 </div>
 
 
+                <div class="code-editor">
+
+                    <div class="code-editor-header">
+                        <label for="css-code">CSS Command Box</label>
+
+                        <span>
+                            Write the Flexbox properties manually
+                        </span>
+                    </div>
+
+                    <textarea id="css-code" spellcheck="false"></textarea>
+
+                    <button id="apply-code-button" class="apply-code">
+                        Apply Code
+                    </button>
+
+                </div>
+
+
                 <div class="buttons">
+
+                    <button id="previous-button" class="previous">
+                        Previous Mission
+                    </button>
 
                     <button id="check-button">
                         Check Solution
