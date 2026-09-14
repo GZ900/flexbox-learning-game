@@ -212,6 +212,17 @@ button:disabled {
     color: #94a3b8;
 }
 
+.feedback.success {
+    background-color: #052e16;
+    color: #86efac;
+    border: 1px solid #166534;
+}
+
+.feedback.error {
+    background-color: #450a0a;
+    color: #fca5a5;
+    border: 1px solid #991b1b;
+}
 
 /* Footer */
 
