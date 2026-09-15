@@ -6,17 +6,14 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-
     background-color: #0f172a;
     color: #e2e8f0;
-
     line-height: 1.5;
 }
 
 .app {
     width: 100%;
     max-width: 1050px;
-
     margin: 0 auto;
     padding: 30px 20px;
 }
@@ -32,7 +29,6 @@ body {
 .header h1 {
     font-size: 2.6rem;
     color: #ffffff;
-
     margin-bottom: 8px;
 }
 
@@ -46,10 +42,8 @@ body {
 .game-panel,
 .controls-panel {
     background-color: #1e293b;
-
     border: 1px solid #334155;
     border-radius: 16px;
-
     padding: 24px;
     margin-bottom: 25px;
 }
@@ -57,23 +51,35 @@ body {
 
 /* Game Information */
 
+.status-bar,
+.game-panel h2,
+#instruction,
+.board-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .status-bar {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-
+    align-items: center;
+    gap: 16px;
     margin-bottom: 20px;
-
     color: #38bdf8;
     font-weight: bold;
 }
 
 .game-panel h2 {
+    text-align: center;
     margin-bottom: 8px;
 }
 
 #instruction {
+    text-align: center;
     color: #cbd5e1;
-
     margin-bottom: 20px;
 }
 
@@ -81,19 +87,19 @@ body {
 /* Game Board */
 
 .board-wrapper {
-    width: 100%;
-
-    overflow-x: auto;
-
-    padding-bottom: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 0;
 }
 
 .game-board {
+    flex: 0 0 600px;
     width: 600px;
     height: 350px;
 
     display: flex;
-
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
@@ -103,10 +109,10 @@ body {
     padding: 20px;
 
     background-color: #020617;
-
     border: 2px solid #38bdf8;
     border-radius: 12px;
 
+    transform-origin: top center;
     transition: 0.25s;
 }
 
@@ -123,7 +129,6 @@ body {
     font-size: 2.5rem;
 
     background-color: #1e293b;
-
     border: 2px solid #475569;
     border-radius: 50%;
 
@@ -139,23 +144,19 @@ body {
 
 .controls-intro {
     color: #94a3b8;
-
     margin-bottom: 20px;
 }
 
 .controls {
     display: flex;
     flex-wrap: wrap;
-
     gap: 18px;
 }
 
 .controls label {
     display: flex;
     flex-direction: column;
-
     flex: 1 1 200px;
-
     gap: 7px;
 
     color: #cbd5e1;
@@ -179,11 +180,9 @@ body {
 
 .code-editor {
     margin-top: 28px;
-
     padding: 18px;
 
     background-color: #111827;
-
     border: 1px solid #334155;
     border-radius: 12px;
 }
@@ -192,9 +191,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 15px;
-
     margin-bottom: 10px;
 }
 
@@ -211,7 +208,6 @@ body {
 .code-editor textarea {
     width: 100%;
     min-height: 140px;
-
     padding: 15px;
 
     resize: vertical;
@@ -229,7 +225,6 @@ body {
 
 button.apply-code {
     margin-top: 12px;
-
     background-color: #7c3aed;
 }
 
@@ -243,9 +238,7 @@ button.apply-code:hover {
 .buttons {
     display: flex;
     flex-wrap: wrap;
-
     gap: 12px;
-
     margin-top: 25px;
 }
 
@@ -262,7 +255,6 @@ button {
     font-weight: bold;
 
     cursor: pointer;
-
     transition: 0.2s;
 }
 
@@ -304,7 +296,6 @@ button:disabled {
 
 .feedback {
     margin-top: 20px;
-
     padding: 14px;
 
     background-color: #0f172a;
@@ -317,25 +308,19 @@ button:disabled {
 
 .feedback.success {
     background-color: #052e16;
-
     color: #86efac;
-
     border-color: #166534;
 }
 
 .feedback.error {
     background-color: #450a0a;
-
     color: #fca5a5;
-
     border-color: #991b1b;
 }
 
 .feedback.info {
     background-color: #172554;
-
     color: #93c5fd;
-
     border-color: #1d4ed8;
 }
 
@@ -344,9 +329,7 @@ button:disabled {
 
 footer {
     text-align: center;
-
     padding: 20px;
-
     color: #64748b;
 }
 
@@ -366,12 +349,6 @@ footer {
     .game-panel,
     .controls-panel {
         padding: 18px;
-    }
-
-    .status-bar {
-        flex-direction: column;
-
-        gap: 5px;
     }
 
     .code-editor-header {

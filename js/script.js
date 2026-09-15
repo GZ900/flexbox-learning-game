@@ -356,7 +356,7 @@ const levels = [
     {
         title: "Mission 20",
         instruction:
-            "Final mission: reverse the vertical order, enable reverse wrapping, distribute the crew evenly and center the columns.",
+            "Final mission: reverse the vertical order, enable reverse wrapping, distribute the crew evenly and center the items within each column.",
 
         items: [
             "🚀",
@@ -381,11 +381,12 @@ const levels = [
 
 let currentLevel = 0;
 
-let attempts = 0;
-
 let solved = false;
 
 const completedLevels = new Set();
+
+const attemptsPerLevel =
+    new Array(levels.length).fill(0);
 
 
 function getCurrentSettings() {
@@ -445,11 +446,16 @@ function renderItems(items) {
             document.createElement("div");
 
         element.className = "game-item";
-
         element.textContent = item;
 
         gameBoard.appendChild(element);
     });
+}
+
+
+function updateAttemptCounter() {
+    attemptCounter.textContent =
+        `Attempts: ${attemptsPerLevel[currentLevel]}`;
 }
 
 
@@ -465,19 +471,17 @@ function loadLevel() {
     instruction.textContent =
         level.instruction;
 
-    attempts = 0;
-
     solved =
         completedLevels.has(currentLevel);
 
-    attemptCounter.textContent =
-        "Attempts: 0";
+    updateAttemptCounter();
 
     feedback.className =
         "feedback";
 
 
     if (solved) {
+
         feedback.textContent =
             "✅ You already completed this mission. You may solve it again or continue.";
 
@@ -485,7 +489,9 @@ function loadLevel() {
             "feedback success";
 
         nextButton.disabled = false;
+
     } else {
+
         feedback.textContent =
             "Choose the Flexbox properties and check your solution.";
 
@@ -498,9 +504,12 @@ function loadLevel() {
 
 
     if (currentLevel === levels.length - 1) {
+
         nextButton.textContent =
             "Restart Game";
+
     } else {
+
         nextButton.textContent =
             "Next Mission";
     }
@@ -512,31 +521,16 @@ function loadLevel() {
 }
 
 
-function resetLevel() {
-    setDefaultControls();
+function resetGame() {
+    completedLevels.clear();
 
-    attempts = 0;
+    attemptsPerLevel.fill(0);
 
-    attemptCounter.textContent =
-        "Attempts: 0";
+    currentLevel = 0;
 
+    solved = false;
 
-    solved =
-        completedLevels.has(currentLevel);
-
-
-    if (solved) {
-        nextButton.disabled = false;
-    } else {
-        nextButton.disabled = true;
-    }
-
-
-    feedback.className =
-        "feedback";
-
-    feedback.textContent =
-        "Level reset. Choose the Flexbox properties and try again.";
+    loadLevel();
 }
 
 
@@ -545,10 +539,9 @@ function checkSolution() {
         levels[currentLevel].solution;
 
 
-    attempts++;
+    attemptsPerLevel[currentLevel]++;
 
-    attemptCounter.textContent =
-        `Attempts: ${attempts}`;
+    updateAttemptCounter();
 
 
     const isCorrect =
@@ -580,7 +573,6 @@ function checkSolution() {
 
             feedback.textContent =
                 "✅ Correct! Mission completed. You can continue to the next mission.";
-
         }
 
 
@@ -617,9 +609,7 @@ function goToNextLevel() {
         levels.length - 1
     ) {
 
-        currentLevel = 0;
-
-        loadLevel();
+        resetGame();
 
         return;
     }
@@ -720,6 +710,7 @@ function applyCodeFromEditor() {
 
 
         if (parts.length !== 2) {
+
             invalidDeclaration = true;
 
             return;
@@ -837,7 +828,7 @@ applyCodeButton.addEventListener(
 
 resetButton.addEventListener(
     "click",
-    resetLevel
+    resetGame
 );
 
 checkButton.addEventListener(
@@ -877,3 +868,37 @@ cssCode.addEventListener(
 
 
 loadLevel();
+
+
+const boardWrapper =
+    document.querySelector(".board-wrapper");
+
+
+function fitGameBoardToScreen() {
+    const boardWidth = 600;
+    const boardHeight = 350;
+
+    const availableWidth =
+        boardWrapper.clientWidth;
+
+    const scale =
+        Math.min(
+            1,
+            availableWidth / boardWidth
+        );
+
+    gameBoard.style.transform =
+        `scale(${scale})`;
+
+    boardWrapper.style.height =
+        `${boardHeight * scale}px`;
+}
+
+
+window.addEventListener(
+    "resize",
+    fitGameBoardToScreen
+);
+
+
+fitGameBoardToScreen();
